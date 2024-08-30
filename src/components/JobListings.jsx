@@ -3,15 +3,15 @@ import { useState, useEffect } from "react";
 import JobListing from "./JobListing";
 import Spinner from "./spinner";
 
-const JobListings = (isHome) => {
+const JobListings = ({isHome = false}) => {
     const [jobs, setJobs] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchJobs = async () => {
-          const apiUrl = isHome ? '/api/jobs?_limit=3' : "http://localhost:8000/jobs"
+          const apiUrl = isHome ? '/api/jobs?_limit=3' : "/api/jobs"
             try {
-                const res = await fetch("/api/jobs?_limit=3");
+                const res = await fetch(apiUrl);
                 const data = await res.json();
                 setJobs(data);
             } catch (error) {
